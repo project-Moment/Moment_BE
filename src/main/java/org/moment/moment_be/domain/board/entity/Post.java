@@ -29,16 +29,4 @@ public class Post {
 
     @UpdateTimestamp
     private Timestamp created_at;
-
-
-    /*public Post(int student_id, String category, String title, String content) {
-        this.student_id = student_id;
-        this.category = category;
-        this.title = title;
-        this.content = content;
-    }
-
-    public Post() {
-
-    }*/
 }

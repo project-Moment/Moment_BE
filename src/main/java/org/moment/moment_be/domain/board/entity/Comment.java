@@ -1,12 +1,18 @@
 package org.moment.moment_be.domain.board.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "comments")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
 
     @Id

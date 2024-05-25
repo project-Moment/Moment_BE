@@ -2,6 +2,7 @@ package org.moment.moment_be.domain.board.controller;
 
 
 import org.moment.moment_be.domain.board.dto.PostDto;
+import org.moment.moment_be.domain.board.dto.PostWithCommentDto;
 import org.moment.moment_be.domain.board.entity.Post;
 import org.moment.moment_be.domain.board.service.BoardReadService;
 import org.moment.moment_be.domain.board.service.BoardWriteService;
@@ -40,10 +41,9 @@ public class BoardController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long postId) {
-        Post post = boardReadService.getPostById(postId);
-        if (post != null) return ResponseEntity.ok().body(post);
-        else return ResponseEntity.notFound().build();
+    public ResponseEntity<PostWithCommentDto> getPostById(@PathVariable Long postId) {
+        PostWithCommentDto postWithCommentDto = boardReadService.getPostById(postId);
+        return ResponseEntity.ok(postWithCommentDto);
     }
 
     @GetMapping("/category/{category}")

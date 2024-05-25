@@ -37,16 +37,15 @@ public class BoardController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<Post>> getPosts(Pageable pageable) {
-        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("created_at").descending());
-
-        Page<Post> postsPage = boardReadService.getPosts(pageable);
-        return ResponseEntity.status(HttpStatus.OK).body(postsPage);
+    public ResponseEntity<List<PostDto>> getPosts() {
+        List<PostDto> posts = boardReadService.getPosts();
+        if (posts.isEmpty()) return ResponseEntity.noContent().build();
+        else return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("/{post_id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long post_id) {
-        Post post = boardReadService.getPostById(post_id);
+    @GetMapping("/{postId}")
+    public ResponseEntity<Post> getPostById(@PathVariable Long postId) {
+        Post post = boardReadService.getPostById(postId);
         if (post != null) return ResponseEntity.ok().body(post);
         else return ResponseEntity.notFound().build();
     }
@@ -58,6 +57,10 @@ public class BoardController {
         else return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/update/{postId")
+    public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post post) {
+
+    }
 
 
 }

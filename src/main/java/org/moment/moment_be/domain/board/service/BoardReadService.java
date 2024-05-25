@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class BoardReadService {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     public BoardReadService(PostRepository postRepository) {

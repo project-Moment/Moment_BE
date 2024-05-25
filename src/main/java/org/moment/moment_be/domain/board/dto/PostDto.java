@@ -6,9 +6,9 @@ import java.sql.Timestamp;
 
 @Data
 public class PostDto {
-    private Long post_id;
+    private Long postId;
     private String title;
-    private int student_id;
+    private int studentId;
     private String category;
-    private Timestamp created_at;
+    private Timestamp createdAt;
 }

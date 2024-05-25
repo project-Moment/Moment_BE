@@ -17,9 +17,11 @@ public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_id;
+    @Column(name = "post_Id")
+    private Long postId;
 
-    private int student_id;
+    @Column(name = "student_id")
+    private int studentId;
 
     private String category;
 
@@ -28,5 +30,6 @@ public class Post {
     private String content;
 
     @UpdateTimestamp
-    private Timestamp created_at;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 }

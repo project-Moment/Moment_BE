@@ -17,17 +17,22 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long comment_id;
+    @Column(name = "comment_id")
+    private Long commentId;
 
-    private Long post_id;
+    @Column(name = "post_id")
+    private Long postId;
 
-    private Long student_id;
+    @Column(name = "student_id")
+    private Long studentId;
 
-    private Long parent_comment_id;
+    @Column(name = "parent_comment_id")
+    private Long parentCommentId;
 
     private String content;
 
     @UpdateTimestamp
-    private Timestamp created_at;
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
 }

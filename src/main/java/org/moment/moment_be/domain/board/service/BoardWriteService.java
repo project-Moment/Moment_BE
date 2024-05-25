@@ -34,4 +34,9 @@ public class BoardWriteService {
             return postRepository.save(updatedPost);
         } else return null;
     }
+
+    public void deletePost(Long postId){
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (optionalPost.isPresent()) postRepository.deleteById(postId);
+    }
 }

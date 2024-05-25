@@ -59,4 +59,10 @@ public class BoardController {
         if (updatePost != null) return ResponseEntity.ok().body(updatePost);
         else return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("/delete/{postId}")
+    public ResponseEntity<Post> deletePost(@PathVariable Long postId) {
+        boardWriteService.deletePost(postId);
+        return ResponseEntity.noContent().build();
+    }
 }

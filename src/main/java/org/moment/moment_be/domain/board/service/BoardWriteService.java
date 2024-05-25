@@ -10,7 +10,7 @@ import java.util.Optional;
 @Service
 public class BoardWriteService {
 
-    private PostRepository postRepository;
+    private final PostRepository postRepository;
 
     @Autowired
     public BoardWriteService(PostRepository postRepository) {

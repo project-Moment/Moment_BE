@@ -17,11 +17,11 @@ public class BoardWriteService {
         this.postRepository = postRepository;
     }
 
-    public Post createPost(Post post){
+    public Post createPost(Post post) {
         return postRepository.save(post);
     }
 
-    public Post updatePost(Long postId, Post post){
+    public Post updatePost(Long postId, Post post) {
         Optional<Post> optionalPost = postRepository.findById(postId);
 
         if (optionalPost.isPresent()) {

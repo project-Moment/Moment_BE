@@ -35,7 +35,7 @@ public class BoardWriteService {
         } else return null;
     }
 
-    public void deletePost(Long postId){
+    public void deletePost(Long postId) {
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isPresent()) postRepository.deleteById(postId);
     }

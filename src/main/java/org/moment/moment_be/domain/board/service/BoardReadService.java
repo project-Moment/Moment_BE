@@ -23,7 +23,7 @@ public class BoardReadService {
     }
 
     public List<PostDto> getPosts() {
-        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+        List<Post> posts = postRepository.findAll(Sort.by(Sort.Direction.DESC, "postId"));
         return posts.stream().map(this::converToDto).collect(Collectors.toList());
     }
 
@@ -33,7 +33,7 @@ public class BoardReadService {
     }
 
     public List<PostDto> getPostByCategory(String category) {
-        List<Post> posts = postRepository.findByCategory(category, Sort.by("createdAt").descending());
+        List<Post> posts = postRepository.findByCategory(category, Sort.by("postId").descending());
         return posts.stream().map(this::converToDto).collect(Collectors.toList());
     }
 

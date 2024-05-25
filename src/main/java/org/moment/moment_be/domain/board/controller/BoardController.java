@@ -53,10 +53,10 @@ public class BoardController {
         else return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/update/{postId")
+    @PutMapping("/update/{postId}")
     public ResponseEntity<Post> updatePost(@PathVariable Long postId, @RequestBody Post post) {
-
+        Post updatePost = boardWriteService.updatePost(postId, post);
+        if (updatePost != null) return ResponseEntity.ok().body(updatePost);
+        else return ResponseEntity.notFound().build();
     }
-
-
 }

@@ -4,6 +4,7 @@ package org.moment.moment_be.domain.board.service;
 import org.moment.moment_be.domain.board.dto.CommentDto;
 import org.moment.moment_be.domain.board.dto.PostDto;
 import org.moment.moment_be.domain.board.dto.PostWithCommentDto;
+import org.moment.moment_be.domain.board.dto.reCommentDto;
 import org.moment.moment_be.domain.board.entity.Comment;
 import org.moment.moment_be.domain.board.entity.Post;
 import org.moment.moment_be.domain.board.repository.CommentRepository;
@@ -21,11 +22,13 @@ public class BoardReadService {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final CommentService commentService;
 
     @Autowired
-    public BoardReadService(PostRepository postRepository, CommentRepository commentRepository) {
+    public BoardReadService(PostRepository postRepository, CommentRepository commentRepository, CommentService commentService) {
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
+        this.commentService = commentService;
     }
 
     public List<PostDto> getPosts() {
@@ -37,7 +40,7 @@ public class BoardReadService {
         Optional<Post> postOptional = postRepository.findById(postId);
 
         Post post = postOptional.get();
-        List<Comment> comments = commentRepository.findCommentByPostId(postId);
+        List<Comment> comments = commentRepository.findByPostIdAndParentCommentIdIsNull(postId);
 
         PostWithCommentDto postWithCommentDto = new PostWithCommentDto();
         postWithCommentDto.setPost(post);
@@ -47,6 +50,7 @@ public class BoardReadService {
             commentDto.setContent(comment.getContent());
             commentDto.setStudentId(comment.getStudentId());
             commentDto.setCreatedAt(comment.getCreatedAt());
+            commentDto.setRecomment(converToDtoWithReplies(comment));
             return commentDto;
         }).collect(Collectors.toList()));
         return postWithCommentDto;
@@ -65,6 +69,22 @@ public class BoardReadService {
         postDto.setTitle(post.getTitle());
         postDto.setCreatedAt(post.getCreatedAt());
         return postDto;
+    }
+
+    private List<reCommentDto> converToDtoWithReplies(Comment comment) {
+        List<Comment> comments = commentRepository.findByParentCommentId(comment.getCommentId());
+        List<reCommentDto> reCommentDto = comments.stream().map(this::convertToDto).collect(Collectors.toList());
+
+        return reCommentDto;
+    }
+
+    private reCommentDto convertToDto(Comment comment) {
+        reCommentDto recommentDto = new reCommentDto();
+        recommentDto.setCommentId(comment.getCommentId());
+        recommentDto.setStudentId(comment.getStudentId());
+        recommentDto.setContent(comment.getContent());
+        recommentDto.setCreatedAt(comment.getCreatedAt());
+        return recommentDto;
     }
 
 }

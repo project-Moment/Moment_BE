@@ -20,6 +20,15 @@ public class CommentController {
     @PostMapping("/{postId}/comment")
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment) {
         comment.setPostId(postId);
+        comment.setParentCommentId(null);
+        Comment createdComment = commentService.createComment(comment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
+    }
+
+    @PostMapping("/{postId}/recomment/{commentId}")
+    public ResponseEntity<Comment> recomment(@PathVariable Long postId, @PathVariable Long commentId, @RequestBody Comment comment) {
+        comment.setPostId(postId);
+        comment.setParentCommentId(commentId);
         Comment createdComment = commentService.createComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
     }

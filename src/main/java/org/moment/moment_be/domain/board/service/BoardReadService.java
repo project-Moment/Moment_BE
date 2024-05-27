@@ -22,13 +22,11 @@ public class BoardReadService {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
-    private final CommentService commentService;
 
     @Autowired
-    public BoardReadService(PostRepository postRepository, CommentRepository commentRepository, CommentService commentService) {
+    public BoardReadService(PostRepository postRepository, CommentRepository commentRepository) {
         this.postRepository = postRepository;
         this.commentRepository = commentRepository;
-        this.commentService = commentService;
     }
 
     public List<PostDto> getPosts() {
@@ -73,7 +71,9 @@ public class BoardReadService {
 
     private List<reCommentDto> converToDtoWithReplies(Comment comment) {
         List<Comment> comments = commentRepository.findByParentCommentId(comment.getCommentId());
-        List<reCommentDto> reCommentDto = comments.stream().map(this::convertToDto).collect(Collectors.toList());
+        List<reCommentDto> reCommentDto = comments.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
 
         return reCommentDto;
     }

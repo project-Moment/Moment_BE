@@ -6,15 +6,14 @@ import org.moment.moment_be.domain.student.entity.Student;
 import org.moment.moment_be.domain.student.service.StudentService;
 import org.moment.moment_be.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
@@ -45,10 +44,10 @@ public class StudentController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<Student> login(@RequestParam Integer id, @RequestParam String password) {
-        return studentService.login(id, password)
-                .map(student -> ResponseEntity.ok().body(student))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    public Optional<Student> login(@RequestParam Integer id, @RequestParam String password) {
+        return studentService.login(id, password);
+                //.map(student -> ResponseEntity.ok().body(student))
+                //.orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
     // 로그아웃

@@ -41,8 +41,8 @@ public class SecurityConfig {
                 .csrf(csrfConfigurer -> csrfConfigurer.disable()) // CSRF 비활성화
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/students/login", "/students/signup").permitAll() // 인증, 회원가입 경로는 접근 허용
-                                .anyRequest().authenticated() // 그 외 모든 경로는 인증 필요
+                                //.requestMatchers("/students/login", "/students/signup").permitAll() // 인증, 회원가입 경로는 접근 허용
+                                .anyRequest().permitAll()//.authenticated() // 그 외 모든 경로는 인증 필요
                 )
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

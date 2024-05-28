@@ -31,8 +31,8 @@ public class BoardController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<Post> createPost(@RequestBody Post post, @AuthenticationPrincipal UserDetails userDetails) {
-        post.setStudentId(Integer.parseInt(userDetails.getUsername()));
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {//, @AuthenticationPrincipal UserDetails userDetails) {
+        //post.setStudentId(Integer.parseInt(userDetails.getUsername()));
         Post createdPost = boardWriteService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }

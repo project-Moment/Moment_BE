@@ -20,19 +20,19 @@ public class CommentController {
     }
 
     @PostMapping("/{postId}/comment")
-    public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment) {//, @AuthenticationPrincipal UserDetails userDetails) {
         comment.setPostId(postId);
-        comment.setStudentId(Integer.valueOf(userDetails.getUsername()));
+        //comment.setStudentId(Integer.valueOf(userDetails.getUsername()));
         comment.setParentCommentId(null);
         Comment createdComment = commentService.createComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
     }
 
     @PostMapping("/{postId}/recomment/{commentId}")
-    public ResponseEntity<Comment> recomment(@PathVariable Long postId, @PathVariable Long commentId, @RequestBody Comment comment, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<Comment> recomment(@PathVariable Long postId, @PathVariable Long commentId, @RequestBody Comment comment) {//, @AuthenticationPrincipal UserDetails userDetails) {
         comment.setPostId(postId);
         comment.setParentCommentId(commentId);
-        comment.setStudentId(Integer.valueOf(userDetails.getUsername()));
+        //comment.setStudentId(Integer.valueOf(userDetails.getUsername()));
         Comment createdComment = commentService.createComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
     }

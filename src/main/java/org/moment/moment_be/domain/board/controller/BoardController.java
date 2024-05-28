@@ -9,6 +9,9 @@ import org.moment.moment_be.domain.board.service.BoardWriteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.oauth2.login.OAuth2LoginSecurityMarker;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,10 +31,17 @@ public class BoardController {
     }
 
     @PostMapping("/post")
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {//, @AuthenticationPrincipal UserDetails userDetails) {
+        //post.setStudentId(Integer.parseInt(userDetails.getUsername()));
         Post createdPost = boardWriteService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
     }
+
+    /*@PostMapping("/post")
+    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+        Post createdPost = boardWriteService.createPost(post);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+    }*/
 
     @GetMapping("")
     public ResponseEntity<List<PostDto>> getPosts() {

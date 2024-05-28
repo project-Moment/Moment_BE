@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class CommentDto {
     private Long commentId;
-    private Long studentId;
+    private Integer studentId;
     private String content;
     private Timestamp createdAt;
     private List<reCommentDto> recomment;

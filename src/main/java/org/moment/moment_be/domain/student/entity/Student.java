@@ -16,7 +16,7 @@ import java.security.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class student {
+public class Student {
 
     @Id
     @Column(name = "student_id")

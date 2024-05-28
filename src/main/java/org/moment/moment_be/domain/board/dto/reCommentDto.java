@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Data
 public class reCommentDto {
     private Long commentId;
-    private Long studentId;
+    private Integer studentId;
     private String content;
     private Timestamp createdAt;
 }

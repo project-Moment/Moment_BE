@@ -24,7 +24,7 @@ public class Comment {
     private Long postId;
 
     @Column(name = "student_id")
-    private Long studentId;
+    private Integer studentId;
 
     @Column(name = "parent_comment_id")
     private Long parentCommentId;

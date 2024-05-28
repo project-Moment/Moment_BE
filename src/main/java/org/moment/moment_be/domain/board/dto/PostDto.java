@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 public class PostDto {
     private Long postId;
     private String title;
-    private int studentId;
+    private Integer studentId;
     private String category;
     private Timestamp createdAt;
 }

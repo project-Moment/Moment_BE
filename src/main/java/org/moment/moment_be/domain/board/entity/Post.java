@@ -21,7 +21,7 @@ public class Post {
     private Long postId;
 
     @Column(name = "student_id")
-    private int studentId;
+    private Integer studentId;
 
     private String category;
 

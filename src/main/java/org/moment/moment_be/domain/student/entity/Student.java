@@ -9,14 +9,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "students")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class student {
+public class Student {
 
     @Id
     @Column(name = "student_id")
@@ -37,4 +38,7 @@ public class student {
     @UpdateTimestamp
     @Column(name = "created_at")
     private Timestamp createdAt;
+
+    @Column(name = "profile_image")
+    private String image;
 }
